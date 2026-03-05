@@ -139,3 +139,10 @@ class ImageEditorApp:
             )
             self.image_label.configure(image=self.image_tk)
 
+    def apply_filter(self, filter_type):
+        if self.image:
+            self.image = self.image.filter(filter_type)
+            self.history.append(self.image.copy())
+            self.redo_stack.clear()  # clear redo when new action
+            self.display_image()
+
