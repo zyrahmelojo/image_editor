@@ -122,3 +122,20 @@ class ImageEditorApp:
             self.history = [self.image.copy()] #reset history
             self.display_image()
 
+    def display_image(self):
+        if self.image:
+            max_width, max_height = 400, 300
+            aspect_ratio = self.image.width / self.image.height
+
+            if self.image.width > self.image.height:
+                new_width = min(max_width, self.image.width)
+                new_height = int(new_width / aspect_ratio)
+            else:
+                new_height = min(max_height, self.image.height)
+                new_width = int(new_height * aspect_ratio)
+
+            self.image_tk = ImageTk.PhotoImage(
+                self.image.resize((new_width, new_height), Image.LANCZOS)
+            )
+            self.image_label.configure(image=self.image_tk)
+
