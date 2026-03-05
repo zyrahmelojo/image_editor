@@ -187,6 +187,13 @@ class ImageEditorApp:
             self.history.append(self.image.copy())
             self.display_image()
 
+    def adjust_contrast(self, value):
+        if self.original_image:
+            enhancer = ImageEnhance.Contrast(self.original_image)
+            self.image = enhancer.enhance(1 + int(value) / 100)
+            self.display_image()
+
+
 
 
 
