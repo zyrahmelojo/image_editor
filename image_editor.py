@@ -168,5 +168,12 @@ class ImageEditorApp:
                 self.image.save(file_path)
                 messagebox.showinfo("Success", "Image saved successfully!")
 
+    def rotate_image(self, angle):
+        if self.image:
+            self.image = self.image.rotate(angle, expand=True)
+            self.history.append(self.image.copy())
+            self.display_image()
+
+
 
 
