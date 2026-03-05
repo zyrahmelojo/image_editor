@@ -193,6 +193,11 @@ class ImageEditorApp:
             self.image = enhancer.enhance(1 + int(value) / 100)
             self.display_image()
 
+    def undo(self):
+        if len(self.history) > 1:
+            self.redo_stack.append(self.history.pop())
+            self.image = self.history[-1].copy()
+            self.display_image()
 
 
 
