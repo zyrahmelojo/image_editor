@@ -151,4 +151,10 @@ class ImageEditorApp:
             self.image = self.original_image.copy()
             self.display_image()
 
+    def apply_grayscale(self):
+        if self.image:
+            self.image = self.image.convert("L").convert("RGB")
+            self.history.append(self.image.copy())
+            self.display_image()
+
 
