@@ -35,3 +35,80 @@ class ImageEditorApp:
             bg="#007bff", fg="white", font=("Arial", 10), padx=8, pady=3
         )
         self.load_button.pack(pady=8)
+        # Image Display
+        self.image_label = tk.Label(self.root, bg="#e6f7ff")
+        self.image_label.pack(pady=8)
+
+        # Filters Section
+        self.filters_frame = tk.Frame(self.root, bg="#e6f7ff")
+        self.filters_frame.pack(pady=18)
+
+        filters = [
+            ("Blur", ImageFilter.BLUR),
+            ("Contour", ImageFilter.CONTOUR),
+            ("Edge Enhance", ImageFilter.EDGE_ENHANCE),
+            ("Emboss", ImageFilter.EMBOSS),
+            ("Sharpen", ImageFilter.SHARPEN),
+            ("Smooth", ImageFilter.SMOOTH),
+        ]
+        for filter_name, filter_type in filters:
+            tk.Button(
+                self.filters_frame, text=filter_name, command=lambda ft=filter_type: self.apply_filter(
+                ft), bg="#007bff", fg="white", font=("Arial", 8), padx=8, pady=3
+            ).pack(side="left", padx=8, pady=3)
+
+        # Extra Filters
+        tk.Button(self.filters_frame, text="Grayscale",
+                  command=self.apply_grayscale,
+                  bg="#6c757d", fg="white", font=("Arial", 8), padx=8
+                  ).pack(side="left", padx=8)
+
+        # Buttons Frame
+        self.buttons_frame = tk.Frame(self.root, bg="#e6f7ff")
+        self.buttons_frame.pack(pady=18)
+
+        # Reset Button
+        self.reset_button = tk.Button(
+            self.buttons_frame, text="Reset Image", command=self.reset_image,
+            bg="#28a745", fg="white", font=("Arial", 10), padx=8, pady=3
+        )
+        self.reset_button.pack(side="left", padx=8)
+
+        # Save Image Button
+        self.save_button = tk.Button(
+            self.buttons_frame, text="Save Image", command=self.save_image, bg="#17a2b8", fg="white", font=("Arial", 10), padx=8, pady=3
+        )
+        self.save_button.pack(side="left", padx=10)
+
+        # Rotate & Flip Buttons
+        tk.Button(self.buttons_frame, text="Rotate 90°",
+                  command=lambda: self.rotate_image(90),
+                  bg="#ffc107", fg="black", font=("Arial", 10), padx=8, pady=3
+                  ).pack(side="left", padx=8)
+
+        tk.Button(self.buttons_frame, text="Flip Horizontal",
+                  command=self.flip_horizontal,
+                  bg="#ffc107", fg="black", font=("Arial", 10), padx=8, pady=3
+                  ).pack(side="left", padx=8)
+
+        # Undo/Redo Buttons
+        tk.Button(self.buttons_frame, text="Undo",
+                  command=self.undo,
+                  bg="#dc3545", fg="white", font=("Arial", 10), padx=8, pady=3
+                  ).pack(side="left", padx=8)
+
+        tk.Button(self.buttons_frame, text="Redo",
+                  command=self.redo,
+                  bg="#dc3545", fg="white", font=("Arial", 10), padx=8, pady=3
+                  ).pack(side="left", padx=8)
+
+        # Brightness & Contrast Sliders
+        self.brightness_slider = tk.Scale(self.root, from_=-50, to=50,
+                                          orient="horizontal", label="Brightness",
+                                          command=self.adjust_brightness)
+        self.brightness_slider.pack(fill="x", padx=18)
+
+        self.contrast_slider = tk.Scale(self.root, from_=-50, to=50,
+                                        orient="horizontal", label="Contrast",
+                                        command=self.adjust_contrast)
+        self.contrast_slider.pack(fill="x", padx=18)
