@@ -146,3 +146,9 @@ class ImageEditorApp:
             self.redo_stack.clear()  # clear redo when new action
             self.display_image()
 
+    def reset_image(self):
+        if self.original_image:
+            self.image = self.original_image.copy()
+            self.display_image()
+
+
