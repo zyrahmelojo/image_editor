@@ -174,6 +174,13 @@ class ImageEditorApp:
             self.history.append(self.image.copy())
             self.display_image()
 
+    def flip_horizontal(self):
+        if self.image:
+            self.image = self.image.transpose(Image.FLIP_LEFT_RIGHT)
+            self.history.append(self.image.copy())
+            self.display_image()
+
+
 
 
 
