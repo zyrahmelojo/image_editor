@@ -112,3 +112,13 @@ class ImageEditorApp:
                                         orient="horizontal", label="Contrast",
                                         command=self.adjust_contrast)
         self.contrast_slider.pack(fill="x", padx=18)
+    def load_image(self):
+        file_path = filedialog.askopenfilename(
+            filetypes=[("Image Files", "*.jpg *.jpg *.png *.bmp *.gif")]
+        )
+        if file_path:
+            self.original_image = Image.open(file_path)
+            self.image = self.original_image.copy()
+            self.history = [self.image.copy()] #reset history
+            self.display_image()
+
