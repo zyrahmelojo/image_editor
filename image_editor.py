@@ -199,7 +199,17 @@ class ImageEditorApp:
             self.image = self.history[-1].copy()
             self.display_image()
 
+    def redo(self):
+        if self.redo_stack:
+            self.image = self.redo_stack.pop()
+            self.history.append(self.image.copy())
+            self.display_image()
 
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ImageEditorApp(root)
+    root.mainloop()
 
 
 
