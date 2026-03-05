@@ -157,4 +157,16 @@ class ImageEditorApp:
             self.history.append(self.image.copy())
             self.display_image()
 
+    def save_image(self):
+        if self.image:
+            file_path = filedialog.asksaveasfilename(
+                defaultextension=".png",
+                filetypes=[("PNG files", "*.png"),
+                           ("JPEG files", "*.jpg"), ("All files", "*.*")]
+            )
+            if file_path:
+                self.image.save(file_path)
+                messagebox.showinfo("Success", "Image saved successfully!")
+
+
 
